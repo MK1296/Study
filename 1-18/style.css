@@ -1,0 +1,46 @@
+.中段::after {
+  content: "";
+  display: block;
+  clear: both;  
+}
+.orange{
+background-color: #ffce7a;
+width:400px;
+height: 100px;    
+}
+.blue{
+float: left;    
+background-color: #9DDDF4;
+width:150px;
+height: 250px;
+}
+.黄赤緑ピンク{
+float: left;    
+}
+.green{    
+background-color: #C2FFC8;
+width:150px;
+height:50px;    
+}
+.pink{   
+background-color: #FFC2C5;
+width:150px;
+height:100px;    
+}
+.red{ 
+float: right;      
+background-color: #F89C9C;
+width:100px;
+height:150px;    
+}
+.yellow{    
+background-color: #FFF083;
+width:250px;
+height:100px;   
+}
+.purple{
+float: left;    
+background-color: #BEA5FF;
+width:400px;
+height:100px;    
+}

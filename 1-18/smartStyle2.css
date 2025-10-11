@@ -1,0 +1,57 @@
+@media screen and (max-width: 767px) {
+ .orange {
+    width: 300px;
+ }   
+ .blue {
+    width: 100px;
+ }
+ .red {
+    width: 75px;
+ }
+ .green {
+    width: 125px;
+ }
+ .pink {
+    width: 125px;
+ }
+ .yellow {
+    width: 200px;
+ }
+ .purple {
+    width: 300px;
+ }
+
+}
+@media screen and (max-width: 479px) {
+
+ .orange {
+    width: 150px;
+ }   
+ .blue {
+    width: 150px;
+    height: 100px;
+    float: none;
+ }
+ .red {
+    width: 150px;
+    height: 100px;
+    float: none;
+ }
+ .green {
+    width: 150px;
+    height: 50px;
+ }
+ .pink {
+    width: 150px;
+ }
+ .yellow {
+    width: 150px;
+ }
+ .purple {
+    width: 150px;
+    float: none;
+ }
+ .黄赤緑ピンク{
+float: none;    
+}
+}
