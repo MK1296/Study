@@ -1,0 +1,38 @@
+@media screen and (max-width: 479px) {
+
+ .orange {
+    width: 200px;
+    height: 200px;
+ }
+ .white{
+    width: 60px;
+    height: 160px;
+    margin-top: 20px;
+    margin-left: 70px;
+ }   
+ .blue {
+    width: 200px;
+    height: 100px;
+    float: none;
+ }
+ .green {
+    width: 200px;
+    height: 200px;
+ }
+ .red1 {
+    margin-top: 20px;
+    margin-left: 30px;
+ }
+ .red2 {
+    margin-top: 10px;
+    margin-left: 30px;
+ }
+ .red3 {
+    margin-top: 10px;
+    margin-left: 30px;
+ }
+ .purple {
+    width: 200px;
+    float: none;
+ }
+}

@@ -1,0 +1,85 @@
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;  
+}
+.orange{
+    background-color: #ffce7a;
+    width: 400px;
+    height: 100px;
+}
+.white{
+    background-color: #fff;
+    width: 160px;
+    height: 60px;
+    margin-top: 20px;
+    margin-left: 220px;
+    float: left;
+}
+.green1{
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+.green2{
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+.green3{
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+.blue{
+    background-color: #9dddf4;
+    width: 150px;
+    height: 250px;
+    float: left;
+}
+.green{
+    width: 250px;
+    height: 250px;
+    float: right;
+}
+.red1{
+    background-color: #ffc2c5;
+    width: 140px;
+    height: 40px;
+    border: solid 5px #fff;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+.red2{
+    background-color: #ffc2c5;
+    width: 140px;
+    height: 40px;
+    border: solid 5px #fff;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.red3{
+    background-color: #ffc2c5;
+    width: 140px;
+    height: 40px;
+    border: solid 5px #fff;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.purple{
+    background-color: #bea5ff;
+    width: 400px;
+    height: 100px;
+}
+.bg-white {
+    background-color: #c2ffc8;
+}
+.中段{
+    float: left;
+}
