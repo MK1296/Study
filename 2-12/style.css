@@ -1,0 +1,34 @@
+.中::after {
+  content: "";
+  display: block;
+  clear: both;  
+}
+.green{
+background-color: #9dff7a;
+width: 415px;
+height: 100px;  
+margin-bottom: 15px;  
+}
+.yellow{
+background-color: #eafa6e;
+width:300px;
+height: 100px; 
+margin-right: 15px;   
+}
+.yellow{
+float: left;  
+}
+.pink{
+background-color: #f899e9;
+width:100px;
+height: 100px;    
+}
+.pink{
+float: left;  
+}
+.blue{
+background-color: #7ad7ff;
+width:415px;
+height: 100px;
+margin-top: 15px;    
+}
