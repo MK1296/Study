@@ -30,11 +30,10 @@ public class Task2_21 {
          * int型の配列を宣言し、1から18までの偶数を格納して、
          * ループを使用して順番に表示してください。
          */
-        int[] num = {1,2,3,4,5,6,7,8,9};
+        int[] num = {2,4,6,8,10,12,14,16,18};
 
         for(int i=0; i<num.length; i++){
-            System.out.println((i+1)*2);
-            System.out.println();
+            System.out.println(num[i]);
         }
 
         /*

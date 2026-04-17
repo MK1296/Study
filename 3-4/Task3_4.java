@@ -30,11 +30,10 @@ public class Task3_4 {
          * int型の配列を宣言し、2から20までの偶数を格納して、
          * for文で順番に表示してください。
          */
-        int[] num = {1,2,3,4,5,6,7,8,9,10};
+        int[] num = {2,4,6,8,10,12,14,16,18,20};
 
         for(int i=0; i<num.length; i++){
-            System.out.println((i+1)*2);
-            System.out.println();
+            System.out.println(num[i]);
         }
 
         /*
