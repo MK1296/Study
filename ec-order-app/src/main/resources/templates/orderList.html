@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>受注一覧</title>
+</head>
+<body>
+
+<h1>受注一覧</h1>
+
+<table border="1">
+
+    <tr>
+        <th>受注ID</th>
+        <th>受注番号</th>
+        <th>購入者名</th>
+        <th>商品名</th>
+        <th>数量</th>
+        <th>編集</th>
+        <th>削除</th>
+    </tr>
+
+    <tr th:each="order : ${orderList}">
+
+        <td th:text="${order.orderId}"></td>
+
+        <td th:text="${order.orderNo}"></td>
+
+        <td th:text="${order.customerName}"></td>
+
+        <td th:text="${order.productName}"></td>
+
+        <td th:text="${order.quantity}"></td>
+
+        <td>
+            <a th:href="@{/orders/edit/{id}(id=${order.orderId})}">
+                編集
+            </a>
+        </td>
+
+        <td>
+            <a th:href="@{/orders/delete/{id}(id=${order.orderId})}">
+                削除
+            </a>
+        </td>
+
+    </tr>
+
+</table>
+
+</body>
+</html>
