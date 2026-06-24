@@ -1,0 +1,39 @@
+①EXPLAIN の type 列が ALL になっています。
+これは何を意味しますか？
+またパフォーマンスにどのような影響がありますか？
+
+　ALL はフルテーブルスキャンを意味する。
+membersテーブル120万件を全件検索するため、
+CPU・I/O負荷が高く、レスポンス遅延やタイムアウトの原因になる。
+
+
+②possible_keys が NULL になっている理由を説明してください。
+　検索条件に使用しているemail列にインデックスが存在しないため。
+
+
+③このSQLを改善するための ALTER 文または CREATE INDEX 文を記述してください。
+　ALTER文↓
+　　ALTER TABLE members
+　　ADD INDEX idx_email(email);
+
+　CREATE INDEX文↓
+　　CREATE INDEX idx_email
+　　ON members(email);
+
+
+④インデックス追加後、EXPLAIN の各列（type・possible_keys・key・rows・Extra）が
+どのように変わるかを予測してください。
+・type
+　ALL→const
+
+・possible_keys
+　NULL→idx_email
+
+・key
+　NULL→idx_email
+
+・rows
+　1200000→1
+
+・Extra
+　Using where→空欄
