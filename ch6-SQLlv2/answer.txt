@@ -1,0 +1,27 @@
+①現在の EXPLAIN で rows が 50,000 になっている理由を説明してください。
+　idx_customer_id(customer_id) が利用されており、
+customer_id = 2048 に一致する約50,000件のレコードを検索対象としているため。
+
+
+②Using where が表示される原因は何ですか？ 
+idx_customer_id だけではなぜ不十分なのかを説明してください。
+　status列がインデックスに含まれていないため、customer_idで取得した
+50,000件に対して後から status='処理中' を絞り込んでいるため。
+
+
+③今回のクエリをさらに改善するための複合インデックスを設計し、
+ALTER 文または CREATE INDEX 文を記述してください。
+　ALTER 文↓
+　ALTER TABLE orders
+　ADD INDEX idx_cust_status(customer_id, status);
+
+　CREATE INDEX 文↓
+　CREATE INDEX idx_cust_status
+　ON orders(customer_id, status);
+
+
+④複合インデックスのカラム順序（customer_id → status の順）が重要な理由を説明してください。
+逆順（status → customer_id）にした場合との違いも含めて答えてください。
+　customer_id は検索対象を50,000件まで絞り込めるため先頭列に適している。
+status を先頭にすると、まず500万件のうち約125万件を検索対象としてしまい、効率が悪くなる。
+そのため、（customer_id → status）の順で複合インデックスを作成するのが最適である。
