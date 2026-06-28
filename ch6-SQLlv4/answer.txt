@@ -1,0 +1,35 @@
+①SQL-A の EXPLAIN で c（categories）の type が ALL、
+p（products）の type も ALL になっている理由をそれぞれ説明してください。
+　・categories.nameにインデックスがないため、cはALLになる。
+　・productsのcategory_id・price・is_activeにインデックスがないため、
+pはALLになる。
+
+
+②SQL-B の EXPLAIN で stocks の type が ALL になっている理由を説明してください。
+idx_warehouse が possible_keys にあるのに使われない理由も含めて説明してください。
+　WHERE句がquantity < reorder_point のため、idx_warehouseを利用できない。
+stocks全360万件を走査するため、type=ALLとなる。
+
+
+③SQL-A を改善するために追加すべきインデックスを提案し、DDLを記述してください。
+　CREATE INDEX idx_categories_name
+　ON categories(name);
+
+　CREATE INDEX idx_products_category_active_price
+　ON products(category_id, is_active, price);
+
+
+④SQL-B を改善するために追加すべきインデックスを提案し、DDLを記述してください。
+　CREATE INDEX idx_stocks_product
+　ON stocks(product_id);
+
+　CREATE INDEX idx_products_active
+　ON products(is_active);
+
+　CREATE INDEX idx_stocks_quantity_reorder
+　ON stocks(quantity, reorder_point);
+
+
+⑤SQL-A と SQL-B の改善策における共通点と相違点を説明してください。
+　共通点：フルスキャンが発生しており、インデックス追加で改善する。
+　相違点：SQL-Aは検索条件が主な問題であり、SQL-BはJOINと在庫条件検索が主な問題である。
