@@ -1,0 +1,127 @@
+①問題1（N+1問題）の原因を説明し、SQLを1本に書き換えて解決してください。
+　原因は、注文一覧取得後に各注文ごとに会員情報を取得しており、
+1回の検索に対して追加で大量のSQLが発行される「N+1問題」が発生しているため。
+
+SQL↓
+　SELECT
+    　o.id,
+    　o.member_id,
+    　o.order_date,
+    　o.total_amount,
+    　m.name,
+    　m.rank,
+    　m.region
+　FROM orders o
+　JOIN members m
+    　ON o.member_id = m.id
+　WHERE o.order_date BETWEEN '2026-05-01' AND '2026-05-31'
+  　AND o.status = '発送済';
+
+
+②問題2の EXPLAIN の各行で何が起きているかを説明してください。
+・orders
+type = ALL
+rows = 30,000,000
+
+→ordersテーブル全件をフルスキャンしている。
+→order_date と status の条件判定を全レコードに対して実施している。
+
+・members
+type = ALL
+rows = 2,000,000
+
+→membersテーブル全件を走査してJOINしている。
+
+・order_items
+type = ALL
+rows = 90,000,000
+
+→order_itemsテーブル全件を走査しており、最も大きなボトルネックとなっている。
+
+・products
+type = ALL
+rows = 150,000
+
+→productsテーブル全件を走査している。
+
+・categories
+type = ALL
+rows = 200
+
+→categoriesテーブル全件を走査している。
+
+
+③問題2のSQLの問題点を4つ以上列挙してください。
+・ordersテーブルがフルスキャンされている。
+・order_itemsテーブルがフルスキャンされている。
+・membersテーブルがフルスキャンされている。
+・productsテーブルがフルスキャンされている。
+
+
+④問題点それぞれに対して改善策（インデックス追加・SQL書き換え等）を提案し、
+優先順位をつけて説明してください。
+　1．N+1問題
+　　JOINを利用して会員情報を一括取得する。
+　　SQL発行回数を大幅に削減できる。
+
+　2．orders検索の高速化
+　　order_date と status に複合インデックスを作成する。
+　SQL→(order_date, status)
+
+　3．order_items結合の高速化
+　　order_id にインデックスを作成する。
+　SQL→(order_id)
+
+　4．products結合の高速化
+　　category_id にインデックスを作成する。
+　SQL→(category_id)
+
+　5.サマリーテーブルの導入
+　　月次集計結果を事前に保持することで、大量データの再集計を避ける。
+
+
+⑤改善するためのDDL（CREATE INDEX 文）をすべて記述してください。
+　CREATE INDEX idx_orders_date_status
+　ON orders(order_date, status);
+
+　CREATE INDEX idx_orders_member_id
+　ON orders(member_id);
+
+　CREATE INDEX idx_order_items_order_id
+　ON order_items(order_id);
+
+　CREATE INDEX idx_order_items_product_id
+　ON order_items(product_id);
+
+　CREATE INDEX idx_products_category_id
+　ON products(category_id);
+
+
+⑥インデックス追加後、EXPLAIN の各テーブルの type 列がどのように変わるかを
+予測してください。
+・orders→range
+・members→eq_ref
+・order_items→ref
+・products→eq_ref
+・categories→eq_ref
+
+
+⑦インデックス以外のアプローチ（サマリーテーブル・パーティショニング・キャッシュ等）で
+改善できる点があれば説明してください。
+・サマリーテーブル
+　月次売上集計結果を事前計算して保存する。
+　毎回大量データを集計する必要がなくなる。
+
+・パーティショニング
+　ordersテーブルを月単位で分割する。
+　対象月のみ検索できるため検索範囲を削減できる。
+
+・キャッシュ
+　集計結果をRedisなどへ保存する。
+　同じレポート生成時のDB負荷を削減できる。
+
+・マテリアライズドビュー
+　集計結果を事前保持することで集計コストを削減できる。
+
+・バッチ処理の並列化
+　地域別やカテゴリ別に処理を分割し、並列実行によって処理時間を短縮できる。
