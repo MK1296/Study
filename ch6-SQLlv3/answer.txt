@@ -1,0 +1,38 @@
+①EXPLAIN の3行それぞれで何が起きているかを説明してください。
+　orders→　type=ALLのため、800万件をフルスキャンしている。
+　members→　JOIN時にインデックスが利用されず、50万件をフルスキャンしている。
+　order_items→　order_idにインデックスが無いため、2400万件をフルスキャンしている。
+
+
+②orders テーブルで Using temporary; Using filesort が発生している
+理由を説明してください。
+　ORDER BYに使用しているorder_dateに、適切なインデックスが無いため、
+一時的にテーブルを作成して、並び替えを実施しているため。
+
+
+③このクエリを改善するために追加すべきインデックスを3つ提案し、
+それぞれの理由を説明してください。
+・idx_order_date_status
+　→指定期間の注文だけを検索でき、status='発送済' の条件も同時に絞り込めるため、
+読み取るデータ量を大幅に削減できるから。
+
+・idx_order_id
+　→対応する明細のみ検索が可能になり、JOIN処理が高速化されるから。
+
+・idx_member_name
+　→nameにインデックスがあると、並び替え処理の負荷を軽減できる可能性があるから。
+
+
+④改善するためのDDL（CREATE INDEX 文）をすべて記述してください。
+　CREATE INDEX idx_order_date_status
+　ON orders(order_date, status);
+
+　CREATE INDEX idx_order_id
+　ON order_items(order_id);
+
+
+⑤インデックス追加後の EXPLAIN で各テーブルの type がどの値に改善するかを
+予測してください。
+・orders→range
+・members→eq_ref
+・order_items→ref
