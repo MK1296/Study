@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>タスク管理アプリ</title>
+    <link rel="stylesheet" th:href="@{/css/task-list.css}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>タスク一覧</h1>
+        <p class="subtitle">日々のタスクを整理して、ひとつずつ進めましょう。</p>
+
+        <div class="page-actions">
+    		<a class="button" th:href="@{/tasks/create}">＋ 新規登録</a>
+		</div>
+
+        <!-- 検索エリア -->
+        <form class="search-area" th:action="@{/tasks}" method="get">
+            <input
+                type="text"
+                name="keyword"
+                th:value="${keyword}"
+                placeholder="タスク名で検索">
+
+            <button type="submit">検索</button>
+
+            <a class="button clear-button" th:href="@{/tasks}">クリア</a>
+        </form>
+
+        <!-- タスク一覧 -->
+        <div class="table-card">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>タスクID</th>
+                        <th>ユーザーID</th>
+                        <th>カテゴリー</th>
+                        <th>タスク名</th>
+                        <th>詳細</th>
+                        <th>期限</th>
+                        <th>ステータス</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.taskId}"></td>
+
+                        <td th:text="${task.userId}"></td>
+
+                        <td th:text="${categoryMap[task.categoryId]}"></td>
+
+                        <td th:text="${task.taskName}"></td>
+
+                        <td th:text="${task.taskDetail}"></td>
+
+                        <td th:text="${task.dueDate}"></td>
+
+                        <!-- ステータス -->
+                        <td>
+                            <span
+                                class="status status-not-started"
+                                th:if="${task.status == '未着手'}">
+                                未着手
+                            </span>
+
+                            <span
+                                class="status status-progress"
+                                th:if="${task.status == '進行中'}">
+                                作業中
+                            </span>
+
+                            <span
+                                class="status status-completed"
+                                th:if="${task.status == '完了'}">
+                                完了！
+                            </span>
+                        </td>
+
+                        <!-- 操作 -->
+                        <td>
+                            <a class="button action-button"
+   								th:href="@{/tasks/edit/{taskId}(taskId=${task.taskId})}">
+    							更新
+							</a>
+
+                            <form
+                                th:action="@{/tasks/delete/{taskId}(taskId=${task.taskId})}"
+                                method="post"
+                                style="display: inline;">
+
+                                <button type="submit" class="action-button">削除</button>
+
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

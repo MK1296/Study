@@ -1,0 +1,254 @@
+/* =========================
+   基本設定
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+    background-color: #f5f6f1;
+    color: #333b35;
+    font-family: "Yu Gothic", "Meiryo", sans-serif;
+}
+
+/* =========================
+   ページ全体
+========================= */
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* =========================
+   見出し
+========================= */
+
+h1 {
+    margin-bottom: 8px;
+    color: #304b3b;
+    font-size: 30px;
+}
+
+.subtitle {
+    margin-bottom: 30px;
+    color: #7b857d;
+    font-size: 14px;
+}
+
+/* =========================
+   検索エリア
+========================= */
+
+.search-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-area input {
+    width: 280px;
+    padding: 11px 14px;
+    border: 1px solid #dce2da;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+button,
+.button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #52745d;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+    background-color: #3e6049;
+}
+
+.clear-button {
+    background-color: #e8ece6;
+    color: #526057;
+}
+
+/* =========================
+   テーブル
+========================= */
+
+.table-card {
+    overflow-x: auto;
+    padding: 20px;
+    border-radius: 14px;
+    background-color: #fff;
+    box-shadow: 0 3px 12px rgba(40, 60, 45, 0.06);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th {
+    padding: 14px 12px;
+    background-color: #edf2ec;
+    color: #526457;
+    font-size: 13px;
+    text-align: left;
+}
+
+td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #edf0eb;
+    font-size: 13px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================
+   ステータス表示
+========================= */
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.status-not-started {
+    background-color: #edf0ec;
+    color: #626b63;
+}
+
+.status-progress {
+    background-color: #f8efd9;
+    color: #94712d;
+}
+
+.status-completed {
+    background-color: #e2eee4;
+    color: #477451;
+}
+
+/* =========================
+   操作リンク
+========================= */
+
+a {
+    color: #52745d;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   登録・編集フォーム
+========================= */
+
+.form-card {
+    max-width: 700px;
+    padding: 32px;
+    border-radius: 14px;
+    background-color: #fff;
+    box-shadow: 0 3px 12px rgba(40, 60, 45, 0.06);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    color: #526457;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dce2da;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333b35;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #78947d;
+    box-shadow: 0 0 0 3px rgba(82, 116, 93, 0.12);
+}
+
+.error-message {
+    color: #c45b50;
+    font-size: 13px;
+}
+
+.form-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.form-buttons .button {
+    display: inline-block;
+}
+
+/* =========================
+   一覧画面の操作ボタン
+========================= */
+
+.page-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.action-button {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 32px;
+    padding: 0 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1;
+
+    text-decoration: none;
+    cursor: pointer;
+}
